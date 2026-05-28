@@ -7,9 +7,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./server  # 强制所有命令在 server 目录执行
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -19,11 +16,10 @@ jobs:
         with:
           node-version: 20
 
-      - name: Install all dependencies (including dev)
-        run: npm install
+      # 直接进入server目录安装依赖
+      - name: Install dependencies
+        run: npm install --prefix ./server
 
-      - name: Verify mocha is installed
-        run: npx mocha --version
-
+      # 直接在server目录运行测试脚本
       - name: Run tests
-        run: npm test
+        run: npm test --prefix ./server
