@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./server  # 关键：进入你的后端目录
+        working-directory: ./server
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -21,7 +21,7 @@ jobs:
         cache: 'npm'
 
     - name: Install dependencies
-      run: npm ci
+      run: npm install  # 这里改了，不用 ci 了
 
     - name: Run tests
       run: npm test
